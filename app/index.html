@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cover Coast Studio — GTA-style cover maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <header class="topbar">
+    <div>
+      <h1>Cover Coast Studio</h1>
+      <p class="tagline">Any photo + a caption, made into GTA-style cover art. Offline, nothing leaves your machine.</p>
+    </div>
+    <div class="top-actions">
+      <button id="randomize" type="button" title="Shuffle layout, grade and caption">🎲 Surprise me</button>
+      <button id="undo" type="button" disabled>Undo</button>
+      <button id="redo" type="button" disabled>Redo</button>
+    </div>
+  </header>
+
+  <section class="controls" aria-label="Cover controls">
+    <div class="group">
+      <h2>1 · Photos</h2>
+      <label class="file-label">Add a photo <input id="photo" type="file" accept="image/*"></label>
+      <button id="add-sample" type="button">Use a sample photo</button>
+      <div id="photo-strip" class="photo-strip" aria-label="Loaded photos"></div>
+      <label class="check"><input id="span-one" type="checkbox"> One photo across all panels</label>
+      <p class="hint">Click a panel on the cover to select it, drag to move the photo, scroll to zoom. Or use the sliders below.</p>
+    </div>
+
+    <div class="group">
+      <h2>2 · Layout</h2>
+      <div id="layouts" class="chips" role="group" aria-label="Layout"></div>
+    </div>
+
+    <div class="group">
+      <h2>3 · Grade</h2>
+      <div id="grades" class="chips" role="group" aria-label="Grade"></div>
+    </div>
+
+    <div class="group">
+      <h2>4 · Words</h2>
+      <label>Title <input id="caption" type="text" maxlength="24" value="Solstice Bay"></label>
+      <label>Subtitle <input id="subtitle" type="text" maxlength="32" value="Golden Getaway"></label>
+      <div id="caption-styles" class="chips" role="group" aria-label="Caption style"></div>
+      <div id="heat" class="heat" role="group" aria-label="Heat meter">
+        <span>Heat</span>
+        <button type="button" aria-label="1 star">★</button>
+        <button type="button" aria-label="2 stars">★</button>
+        <button type="button" aria-label="3 stars">★</button>
+        <button type="button" aria-label="4 stars">★</button>
+        <button type="button" aria-label="5 stars">★</button>
+      </div>
+    </div>
+
+    <div class="group">
+      <h2>5 · Selected panel</h2>
+      <p id="selected-panel" class="panel-name">Panel 1</p>
+      <div id="assign" class="chips" role="group" aria-label="Assign photo to selected panel">
+        <button type="button">Photo 1</button>
+        <button type="button">Photo 2</button>
+        <button type="button">Photo 3</button>
+        <button type="button">Photo 4</button>
+      </div>
+      <label>Zoom <input id="zoom" type="range" min="1" max="4" step="0.05" value="1"></label>
+      <label>Move sideways <input id="pan-x" type="range" min="-0.5" max="0.5" step="0.01" value="0"></label>
+      <label>Move up / down <input id="pan-y" type="range" min="-0.5" max="0.5" step="0.01" value="0"></label>
+    </div>
+
+    <div class="group">
+      <h2>6 · Finish</h2>
+      <label class="check"><input id="badge" type="checkbox" checked> Badge ribbon (EST. 2026 • SOLSTICE BAY)</label>
+      <label class="check"><input id="grain" type="checkbox" checked> Film grain</label>
+      <label class="check"><input id="vignette" type="checkbox" checked> Vignette</label>
+      <label>Frame
+        <select id="frame">
+          <option value="white" selected>White</option>
+          <option value="black">Black</option>
+          <option value="none">None</option>
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <section class="preview" aria-label="Cover preview">
+    <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+    <div class="export-bar">
+      <div id="sizes" class="chips" role="group" aria-label="Export size"></div>
+      <button id="export" type="button" class="primary">Export PNG</button>
+      <button id="export-all" type="button" class="primary">Export all 3 sizes</button>
+    </div>
+    <p id="status" role="status"></p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
